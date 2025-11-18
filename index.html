@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carta - Casa de Comida</title>
+  <link rel="stylesheet" href="estilos.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+
+  <!-- Header renovado -->
+  <header class="header">
+    <button id="menuBtn" class="menu-btn">☰</button>
+    <img src="img/panoramica.webp" alt="Panorámica del local" class="panoramica">
+    <img src="img/logo.webp" alt="Logo del local" class="logo">
+    <div class="redes">
+      <a href="https://instagram.com" target="_blank" class="icono instagram" title="Instagram"></a>
+      <a href="https://wa.me/549XXXXXXXXXX" target="_blank" class="icono whatsapp" title="WhatsApp"></a>
+      <a href="https://facebook.com" target="_blank" class="icono facebook" title="Facebook"></a>
+      <a href="https://maps.google.com?q=Ubicación+del+local" target="_blank" class="icono ubicacion" title="Ubicación"></a>
+    </div>
+  </header>
+
+  <!-- Menú flotante -->
+  <div id="menuFlotante" class="menu-flotante oculto">
+    <div class="contenido">
+      <span id="cerrarMenu" class="cerrar-menu">×</span>
+      <h2>Datos del negocio</h2>
+      <p><strong>Dirección:</strong> Calle Ejemplo 123, Ciudad</p>
+      <p><strong>WhatsApp:</strong> +54 9 0000 0000</p>
+      <p><strong>Horario:</strong> Lunes a Domingo de 08:00 a 23:45</p>
+    </div>
+  </div>
+
+  <!-- Filtros -->
+  <nav class="filtros">
+    <button class="filtro-btn" data-categoria="todos">Todos</button>
+    <button class="filtro-btn" data-categoria="comidas">Comidas</button>
+    <button class="filtro-btn" data-categoria="bebidas">Bebidas</button>
+    <button class="filtro-btn" data-categoria="postres">Postres</button>
+  </nav>
+
+  <!-- Contenido -->
+  <div id="menu"></div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true">
+      <span id="cerrar" class="cerrar" aria-label="Cerrar">&times;</span>
+      <div id="carrusel" class="carrusel">
+        <button id="prev" class="flecha" aria-label="Anterior">&#10094;</button>
+        <img id="imagenModal" src="" alt="">
+        <button id="next" class="flecha" aria-label="Siguiente">&#10095;</button>
+      </div>
+      <h2 id="tituloModal"></h2>
+      <p id="precioModal"></p>
+      <p id="descripcionModal"></p>
+      <a id="whatsappModal" href="#" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+    </div>
+  </div>
+
+</body>
+</html>
