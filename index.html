@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Carta - Casa de Comida</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Responsive correcto -->
   <link rel="stylesheet" href="estilos.css">
   <script defer src="script.js"></script>
 </head>
@@ -10,21 +11,41 @@
 
   <!-- Header renovado -->
   <header class="header">
-    <button id="menuBtn" class="menu-btn">☰</button>
+    <button id="menuBtn" class="menu-btn" aria-label="Abrir datos del negocio">☰</button>
     <img src="img/panoramica.webp" alt="Panorámica del local" class="panoramica">
     <img src="img/logo.webp" alt="Logo del local" class="logo">
     <div class="redes">
-      <a href="https://instagram.com" target="_blank" class="icono instagram" title="Instagram"></a>
-      <a href="https://wa.me/549XXXXXXXXXX" target="_blank" class="icono whatsapp" title="WhatsApp"></a>
-      <a href="https://facebook.com" target="_blank" class="icono facebook" title="Facebook"></a>
-      <a href="https://maps.google.com?q=Ubicación+del+local" target="_blank" class="icono ubicacion" title="Ubicación"></a>
+      <a href="https://instagram.com" target="_blank" class="icono instagram" title="Instagram" aria-label="Instagram"></a>
+      <a href="https://wa.me/549XXXXXXXXXX" target="_blank" class="icono whatsapp" title="WhatsApp" aria-label="WhatsApp"></a>
+      <a href="https://facebook.com" target="_blank" class="icono facebook" title="Facebook" aria-label="Facebook"></a>
+      <a href="https://maps.google.com?q=Ubicación+del+local" target="_blank" class="icono ubicacion" title="Ubicación" aria-label="Ubicación"></a>
     </div>
   </header>
 
+  <!-- Buscador -->
+  <input type="text" id="buscador" placeholder="Buscar por nombre, categoría o descripción...">
+
+  <!-- Botón flotante carrito -->
+  <button id="abrirCarrito" class="carrito-btn" aria-label="Abrir carrito">🛒</button>
+
+  <!-- Modal Carrito -->
+  <div id="modalCarrito" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true">
+      <span id="cerrarCarrito" class="cerrar" aria-label="Cerrar carrito">&times;</span>
+      <h2>Tu pedido</h2>
+      <ul id="carritoLista"></ul>
+      <p id="carritoTotal">Total: $0</p>
+      <button id="enviarCarrito">Enviar por WhatsApp</button>
+    </div>
+  </div>
+
+  <!-- Toggle modo oscuro -->
+  <button id="toggleModo" aria-label="Cambiar modo oscuro/claro">🌙/☀️</button>
+
   <!-- Menú flotante -->
-  <div id="menuFlotante" class="menu-flotante oculto">
-    <div class="contenido">
-      <span id="cerrarMenu" class="cerrar-menu">×</span>
+  <div id="menuFlotante" class="menu-flotante oculto" aria-hidden="true">
+    <div class="contenido" role="dialog" aria-modal="true">
+      <span id="cerrarMenu" class="cerrar-menu" aria-label="Cerrar datos del negocio">×</span>
       <h2>Datos del negocio</h2>
       <p><strong>Dirección:</strong> Calle Ejemplo 123, Ciudad</p>
       <p><strong>WhatsApp:</strong> +54 9 0000 0000</p>
@@ -33,20 +54,20 @@
   </div>
 
   <!-- Filtros -->
-  <nav class="filtros">
-    <button class="filtro-btn" data-categoria="todos">Todos</button>
+  <nav class="filtros" aria-label="Filtros de categoría">
+    <button class="filtro-btn activo" data-categoria="todos">Todos</button>
     <button class="filtro-btn" data-categoria="comidas">Comidas</button>
     <button class="filtro-btn" data-categoria="bebidas">Bebidas</button>
     <button class="filtro-btn" data-categoria="postres">Postres</button>
   </nav>
 
   <!-- Contenido -->
-  <div id="menu"></div>
+  <div id="menu" aria-live="polite"></div>
 
-  <!-- Modal -->
+  <!-- Modal producto -->
   <div id="modal" class="modal" aria-hidden="true">
     <div class="modal-content" role="dialog" aria-modal="true">
-      <span id="cerrar" class="cerrar" aria-label="Cerrar">&times;</span>
+      <span id="cerrar" class="cerrar" aria-label="Cerrar producto">&times;</span>
       <div id="carrusel" class="carrusel">
         <button id="prev" class="flecha" aria-label="Anterior">&#10094;</button>
         <img id="imagenModal" src="" alt="">
@@ -55,6 +76,8 @@
       <h2 id="tituloModal"></h2>
       <p id="precioModal"></p>
       <p id="descripcionModal"></p>
+      <!-- Botón dentro del modal para agregar al carrito -->
+      <button id="addCarritoModal" class="addCarrito">Agregar al carrito</button>
       <a id="whatsappModal" href="#" target="_blank" rel="noopener">Pedir por WhatsApp</a>
     </div>
   </div>

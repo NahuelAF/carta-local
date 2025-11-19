@@ -5,11 +5,54 @@
   padding: 0;
 }
 
+:root {
+  --bg: #f2f4f8;
+  --text: #333;
+  --card: #fff;
+  --muted: #555;
+  --accent: #25D366;   /* WhatsApp */
+  --accent-2: #007bff; /* Botón primario */
+  --shadow: rgba(0,0,0,0.08);
+  --shadow-strong: rgba(0,0,0,0.15);
+}
+
 body {
   font-family: 'Segoe UI', sans-serif;
-  background: #f2f4f8;
+  background: var(--bg);
   padding: 20px;
-  color: #333;
+  color: var(--text);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Modo oscuro (con variables) */
+body.oscuro {
+  --bg: #121212;
+  --text: #e0e0e0;
+  --card: #1e1e1e;
+  --muted: #cfcfcf;
+  --shadow: rgba(0,0,0,0.3);
+  --shadow-strong: rgba(0,0,0,0.5);
+}
+body.oscuro .item,
+body.oscuro .menu-flotante .contenido {
+  background: var(--card);
+  color: var(--text);
+}
+body.oscuro .filtro-btn {
+  background: #2a2a2a;
+  color: var(--text);
+}
+body.oscuro .filtro-btn.activo {
+  background: #4caf50;
+  color: #fff;
+}
+body.oscuro .modal-content {
+  background: var(--card);
+  color: var(--text);
+}
+body.oscuro #toggleModo {
+  background: #333;
+  color: #fff;
 }
 
 /* Contenedor de productos */
@@ -19,27 +62,26 @@ body {
   gap: 25px;
   justify-content: center;
   padding: 0 10px;
-  min-height: 500px; /* Altura mínima para evitar distorsión visual */
+  min-height: 500px; /* Evitar salto visual al filtrar */
 }
 
 /* Tarjeta de producto */
 .item {
-  background: #fff;
+  background: var(--card);
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px var(--shadow);
   padding: 20px;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
   cursor: pointer;
   height: 420px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-
 .item:hover {
   transform: scale(1.02);
+  box-shadow: 0 6px 16px var(--shadow-strong);
 }
-
 .item img {
   width: 100%;
   height: 200px;
@@ -47,32 +89,47 @@ body {
   margin-bottom: 15px;
   object-fit: cover;
 }
-
 .item h2 {
   font-size: 1.2rem;
   margin-bottom: 8px;
   color: #111;
 }
-
+body.oscuro .item h2 { color: var(--text); }
 .item p {
   font-size: 0.95rem;
   margin-bottom: 6px;
-  color: #555;
+  color: var(--muted);
 }
 
-.item a {
+/* Acciones dentro de la tarjeta */
+.item .acciones {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.item a,
+.item button.addCarrito {
   display: inline-block;
   margin-top: 12px;
-  background: #25D366;
+  background: var(--accent);
   color: white;
   padding: 10px 16px;
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-weight: bold;
   font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+}
+.item button.addCarrito {
+  background: var(--accent-2);
+}
+.item button.addCarrito:hover {
+  background: #0056b3;
 }
 
-/* Modal */
+/* Modal (producto y carrito comparten estilo) */
 .modal {
   display: none;
   position: fixed;
@@ -82,134 +139,232 @@ body {
   background-color: rgba(0,0,0,0.6);
   overflow-y: auto;
 }
-
 .modal-content {
-  background-color: white;
+  background-color: var(--card);
   margin: 60px auto;
   padding: 25px;
-  border-radius: 12px;
-  max-width: 500px;
-  width: 90%;
+  border-radius: 14px;
+  max-width: 550px;
+  width: 92%;
   text-align: center;
   position: relative;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  animation: fadeIn 0.3s ease;
 }
-
+@keyframes fadeIn {
+  from {opacity: 0; transform: scale(0.95);}
+  to {opacity: 1; transform: scale(1);}
+}
+/* Clase que activa animación desde JS */
+.animarModal {
+  animation: fadeIn 0.3s ease;
+}
 .cerrar {
   position: absolute;
   top: 12px; right: 18px;
-  font-size: 28px;
+  font-size: 30px;
   cursor: pointer;
-  color: #888;
+  color: #aaa;
   z-index: 10;
 }
 
+/* Carrusel del modal de producto */
 .carrusel {
   position: relative;
   margin-bottom: 20px;
   overflow: hidden;
 }
-
 .carrusel img {
   width: 100%;
-  height: 280px;
-  border-radius: 10px;
+  height: 300px;
+  border-radius: 12px;
   object-fit: cover;
   transition: transform 0.3s ease;
   cursor: zoom-in;
 }
-
 .carrusel img.zoomed {
   transform: scale(1.8);
   cursor: zoom-out;
 }
-
 .flecha {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.45);
   color: white;
   border: none;
   font-size: 26px;
-  padding: 6px 12px;
+  padding: 8px 12px;
   cursor: pointer;
   border-radius: 50%;
   z-index: 5;
 }
-
-#prev { left: 10px; }
-#next { right: 10px; }
+#prev { left: 12px; }
+#next { right: 12px; }
 
 #tituloModal {
-  font-size: 1.4rem;
-  margin-bottom: 10px;
+  font-size: 1.5rem;
+  margin-bottom: 12px;
   color: #222;
 }
+body.oscuro #tituloModal { color: var(--text); }
 
 #precioModal {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   margin-bottom: 8px;
   color: #444;
 }
+body.oscuro #precioModal { color: var(--text); }
 
 #descripcionModal {
-  font-size: 0.95rem;
-  margin-bottom: 15px;
-  color: #666;
+  font-size: 1rem;
+  margin-bottom: 16px;
+  color: var(--muted);
 }
-
 #whatsappModal {
   display: inline-block;
-  background: #25D366;
+  background: var(--accent);
   color: white;
-  padding: 10px 16px;
+  padding: 12px 18px;
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: 10px;
   font-weight: bold;
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .modal-content {
-    margin: 30px auto;
-    padding: 20px;
-  }
+/* Botón “Agregar al carrito” dentro del modal de producto */
+#addCarritoModal.addCarrito {
+  background: var(--accent-2);
+  margin: 10px 8px 14px;
+  padding: 10px 16px;
+  border-radius: 10px;
+}
 
-  .item {
-    padding: 15px;
-    height: auto;
-  }
+/* Buscador */
+#buscador {
+  display: block;
+  margin: 22px auto;
+  padding: 12px 16px;
+  width: 92%;
+  max-width: 520px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1.05rem;
+  background: #fff;
+}
+body.oscuro #buscador {
+  background: #1e1e1e;
+  border-color: #444;
+  color: var(--text);
+}
 
-  .item img {
-    height: 180px;
-  }
+/* Botón flotante carrito */
+.carrito-btn {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  font-size: 26px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+}
+.carrito-btn:hover {
+  background: #1da851;
+}
+/* Pulso breve al agregar */
+.pulse {
+  animation: pulse 0.3s ease;
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
 
-  .item h2 {
-    font-size: 1rem;
-  }
+/* Modal carrito contenido */
+#modalCarrito .modal-content h2 {
+  margin-bottom: 10px;
+}
+#carritoLista {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px 0;
+  text-align: left;
+}
+#carritoLista li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid #e9e9e9;
+  font-size: 1rem;
+}
+body.oscuro #carritoLista li {
+  border-color: #333;
+}
+/* Botón quitar ítem del carrito */
+#carritoLista .quitar {
+  background: transparent;
+  border: 1px solid #d33;
+  color: #d33;
+  padding: 4px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+#carritoLista .quitar:hover {
+  background: #d33;
+  color: #fff;
+}
 
-  .item p {
-    font-size: 0.9rem;
-  }
+#carritoTotal {
+  font-weight: bold;
+  margin: 10px 0 16px;
+  font-size: 1.05rem;
+}
 
-  #tituloModal {
-    font-size: 1.2rem;
-  }
+#enviarCarrito {
+  background: var(--accent);
+  color: white;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+}
+#enviarCarrito:hover {
+  background: #1da851;
+}
 
-  #precioModal, #descripcionModal {
-    font-size: 0.9rem;
-  }
-
-  #whatsappModal {
-    font-size: 0.9rem;
-    padding: 8px 12px;
-  }
-
-  .carrusel img {
-    height: 220px;
-  }
+/* Toggle modo oscuro */
+#toggleModo {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #ddd;
+  border: none;
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  display: grid;
+  place-items: center;
+}
+body.oscuro #toggleModo {
+  background: #333;
+  color: #fff;
 }
 
 /* Header renovado */
@@ -226,8 +381,8 @@ body {
   background: white;
   border: none;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   cursor: pointer;
   z-index: 20;
@@ -235,33 +390,34 @@ body {
 .panoramica {
   width: 100%;
   height: auto;
-  max-height: 160px;
+  max-height: 180px;
   object-fit: cover;
 }
 .logo {
-  width: 120px;
+  width: 130px;
   margin-top: -40px;
   border-radius: 50%;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 .redes {
-  margin-top: 10px;
+  margin-top: 12px;
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 16px;
 }
 .icono {
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   background-size: cover;
   display: inline-block;
+  border-radius: 8px;
 }
 .instagram { background-image: url('icon-instagram.png'); }
 .whatsapp { background-image: url('icon-whatsapp.png'); }
 .facebook { background-image: url('icon-facebook.png'); }
 .ubicacion { background-image: url('icon-location.png'); }
 
-/* Menú flotante */
+/* Menú flotante negocio */
 .menu-flotante {
   position: fixed;
   top: 0; left: 0;
@@ -272,22 +428,22 @@ body {
   align-items: center;
   z-index: 999;
 }
-.menu-flotante.oculto {
-  display: none;
-}
+.menu-flotante.oculto { display: none; }
 .menu-flotante .contenido {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  max-width: 400px;
-  width: 90%;
+  background: var(--card);
+  padding: 26px;
+  border-radius: 14px;
+  max-width: 460px;
+  width: 92%;
   text-align: left;
   position: relative;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  animation: fadeIn 0.25s ease;
 }
 .cerrar-menu {
   position: absolute;
   top: 10px; right: 15px;
-  font-size: 24px;
+  font-size: 26px;
   cursor: pointer;
 }
 
@@ -302,18 +458,82 @@ body {
 .filtro-btn {
   background: #ddd;
   border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
+  padding: 10px 16px;
+  border-radius: 10px;
   cursor: pointer;
   font-weight: bold;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: background 0.25s ease, transform 0.2s ease, color 0.25s ease;
+  font-size: 1rem;
 }
 .filtro-btn:hover {
   background: #bbb;
+  transform: translateY(-1px);
 }
 .filtro-btn.activo {
-  background: #25D366;
+  background: var(--accent);
   color: white;
   transform: scale(1.05);
 }
-    
+
+/* Responsive general (optimizado para móviles tipo Motorola G82) */
+@media (max-width: 600px) {
+  body { padding: 16px; }
+
+  #menu { gap: 18px; }
+
+  .item { padding: 16px; height: auto; }
+  .item img { height: 190px; border-radius: 10px; }
+
+  .item h2 { font-size: 1.25rem; }       /* legibilidad */
+  .item p { font-size: 1.05rem; }        /* subir texto */
+
+  .item a, .item button.addCarrito {
+    font-size: 1rem;
+    padding: 12px 16px;                  /* mejor área táctil */
+    border-radius: 10px;
+  }
+
+  /* Modal más cómodo en móvil */
+  .modal-content {
+    margin: 40px auto;
+    padding: 22px;
+    max-width: 94%;
+  }
+  .carrusel img { height: 240px; }
+
+  #tituloModal { font-size: 1.6rem; }
+  #precioModal, #descripcionModal { font-size: 1.1rem; }
+  #whatsappModal { font-size: 1.05rem; padding: 12px 18px; }
+
+  /* Header */
+  .menu-btn { width: 48px; height: 48px; font-size: 22px; }
+  .panoramica { max-height: 160px; }
+  .logo { width: 120px; margin-top: -36px; }
+
+  /* Buscador */
+  #buscador { width: 94%; font-size: 1.1rem; padding: 12px 16px; }
+
+  /* Botón carrito y toggle más grandes */
+  .carrito-btn { width: 60px; height: 60px; font-size: 28px; bottom: 80px; right: 16px; }
+  #toggleModo { width: 56px; height: 56px; font-size: 22px; }
+
+  /* Flechas más tocables */
+  .flecha { font-size: 28px; padding: 10px 14px; }
+}
+
+/* Responsive tablets */
+@media (min-width: 600px) and (max-width: 900px) {
+  #menu {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 22px;
+  }
+  .item h2 { font-size: 1.3rem; }
+  .item p { font-size: 1.05rem; }
+  .carrusel img { height: 280px; }
+}
+
+/* Animación suave para botones, filtros, íconos y tarjetas */
+button, .filtro-btn, .item, #toggleModo, .icono {
+  transition: transform 0.2s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+.icono:hover { transform: scale(1.05); }
