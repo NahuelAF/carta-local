@@ -1,0 +1,301 @@
+/* ===========================
+   COMPONENTS.CSS
+   =========================== */
+
+/* Grid productos */
+#menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 28px;
+  justify-content: center;
+  padding: 0 10px;
+  min-height: 500px;
+  margin-top: 20px;
+}
+
+/* Cards */
+.item {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 420px;
+}
+
+.item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-strong);
+}
+
+.item img {
+  width: 100%;
+  height: 200px;
+  border-radius: 14px;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+/* Modal General */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.55);
+  overflow-y: auto;
+  z-index: 999;
+}
+
+/* Modal estilo Apple */
+.modal-content {
+  background: var(--card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  margin: 90px auto;
+  padding: 28px;
+  border-radius: 18px;
+  max-width: 540px;
+  width: 92%;
+  text-align: center;
+  box-shadow: var(--shadow-strong);
+  position: relative;
+}
+
+/* Botón cerrar – ahora SIEMPRE visible */
+.cerrar {
+  position: absolute;
+  top: -18px;
+  right: -18px;
+  font-size: 20px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  display: grid;
+  place-items: center;
+  box-shadow: var(--shadow-soft);
+  z-index: 9999;
+  cursor: pointer;
+}
+
+/* Carrusel */
+.carrusel {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.carrusel img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.flecha {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.35);
+  border: none;
+  padding: 10px 14px;
+  font-size: 24px;
+  color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#prev { left: 10px; }
+#next { right: 10px; }
+
+/* Buscador centrado */
+#buscador {
+  margin: 40px auto 20px auto;
+  padding: 14px 18px;
+  max-width: 520px;
+  width: 92%;
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  font-size: 1.05rem;
+  background: var(--card);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Filtros → se separan de las cards */
+.filtros {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;  /* <-- antes chocaba */
+}
+
+.filtro-btn {
+  padding: 10px 16px;
+  background: var(--card);
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  font-weight: 600;
+  color: var(--muted);
+  box-shadow: var(--shadow-soft);
+}
+
+.filtro-btn.activo {
+  background: var(--accent);
+  color: white;
+  box-shadow: var(--shadow-strong);
+  transform: scale(1.05);
+}
+
+/* Botones modal */
+#whatsappModal,
+#addCarritoModal.addCarrito {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  color: white;
+  margin: 6px;
+}
+
+#addCarritoModal.addCarrito { background: var(--accent-2); }
+#whatsappModal { background: var(--accent); }
+
+/* Carrito botón */
+.carrito-btn {
+  position: fixed;
+  bottom: 80px;
+  right: 22px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  box-shadow: var(--shadow-strong);
+  border: none;
+}
+
+.carrito-btn:hover { transform: scale(1.06); }
+
+/* Toggle Dark Mode */
+#toggleModo {
+  position: fixed;
+  bottom: 20px;
+  right: 22px;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  place-items: center;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.menu-btn {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: var(--card);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: grid;
+  place-items: center;
+  box-shadow: var(--shadow-soft);
+}
+
+.panoramica {
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.logo {
+  width: 130px;
+  border-radius: 50%;
+  margin-top: -40px;
+  box-shadow: var(--shadow-soft);
+}
+
+/* Redes */
+.redes {
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.icono {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background-size: cover;
+  border: 1px solid var(--border);
+}
+
+
+/* Menú flotante */
+.menu-flotante {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-flotante .contenido {
+  background: var(--card);
+  padding: 28px;
+  border-radius: 18px;
+  max-width: 460px;
+  width: 92%;
+  box-shadow: var(--shadow-strong);
+  border: 1px solid var(--border);
+}
+
+.oculto { display: none; }
+
+/* Filtros (chips estilo Apple) */
+.filtros {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filtro-btn {
+  padding: 10px 16px;
+  background: var(--card);
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  font-weight: 600;
+  color: var(--muted);
+  box-shadow: var(--shadow-soft);
+}
+
+.filtro-btn.activo {
+  background: var(--accent);
+  color: white;
+  box-shadow: var(--shadow-strong);
+  transform: scale(1.05);
+}

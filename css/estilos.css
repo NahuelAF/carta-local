@@ -1,0 +1,1068 @@
+/* =========================================================
+   estilos.css — Oscuro Gourmet (CSS Combinado y Optimizado)
+   ========================================================= */
+
+/* =========================================================
+   RESET & VARIABLES
+========================================================= */
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+html, body { 
+  height: 100%; 
+}
+
+:root {
+  /* Colores principales */
+  --bg: #070708;
+  --surface: #0f0f10;
+  --muted: #bfb5a9;
+  --text: #efe7df;
+  --wine: #7a1515;
+  --wine-2: #a21d1d;
+  --gold: #d9b86b;
+  
+  /* Efectos de cristal y bordes */
+  --glass: rgba(255,255,255,0.02);
+  --border-contrast: rgba(255,255,255,0.03);
+  
+  /* Sombras */
+  --shadow-soft: 0 10px 30px rgba(0,0,0,0.7);
+  --shadow-strong: 0 18px 50px rgba(0,0,0,0.8);
+  
+  /* Utilidades */
+  --radius: 12px;
+  --trans: 220ms cubic-bezier(.2,.9,.3,1);
+}
+
+/* =========================================================
+   BODY
+========================================================= */
+body {
+  font-family: 'Inter', 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(180deg, rgba(4,4,4,0.9), rgba(10,10,10,0.98)), var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.45;
+  padding: 18px;
+  padding-bottom: 80px;
+}
+
+/* Accesibilidad: focus */
+:focus { 
+  outline: 3px solid rgba(162,29,29,0.12); 
+  outline-offset: 3px; 
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+.header {
+  position: relative;
+  width: 100%;
+  margin-bottom: 16px;
+  height: auto;
+  overflow: visible;
+}
+
+/* Imagen panorámica (banner superior) */
+.panoramica {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--border-contrast);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Logo flotante */
+.logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -48px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.03), transparent 20%), 
+              linear-gradient(180deg, #171717, #0f0f0f);
+  border: 6px solid rgba(0,0,0,0.6);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.7);
+  display: block;
+  z-index: 20;
+  object-fit: cover;
+}
+
+/* Redes sociales debajo del logo */
+.redes-header {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -80px;
+  display: flex;
+  gap: 12px;
+  z-index: 30;
+}
+
+.icon-red {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background-size: 80%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 1px solid var(--border-contrast);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  transition: transform var(--trans), box-shadow var(--trans);
+  display: block;
+}
+
+.icon-red:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.7);
+}
+
+/* Iconos específicos - Alta calidad */
+.ig { 
+  background-image: url('https://cdn-icons-png.flaticon.com/512/2111/2111463.png'); 
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+.wsp { 
+  background-image: url('https://cdn-icons-png.flaticon.com/512/733/733585.png'); 
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+.fb { 
+  background-image: url('https://cdn-icons-png.flaticon.com/512/733/733547.png'); 
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+.mapa { 
+  background-image: url('https://cdn-icons-png.flaticon.com/128/1865/1865269.png'); 
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* =========================================================
+   BOTÓN MENÚ HAMBURGUESA
+========================================================= */
+.menu-btn {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #111, #0b0b0b);
+  color: var(--text);
+  border: 1px solid var(--border-contrast);
+  box-shadow: 0 8px 26px rgba(0,0,0,0.6);
+  cursor: pointer;
+  z-index: 40;
+  transition: transform var(--trans), box-shadow var(--trans);
+  font-size: 22px;
+}
+
+.menu-btn:hover { 
+  transform: translateY(-3px); 
+  box-shadow: var(--shadow-strong); 
+}
+
+/* =========================================================
+   BUSCADOR
+========================================================= */
+#buscador {
+  width: 92%;
+  max-width: 720px;
+  margin: 100px auto 18px auto; /* Espacio extra para logo y redes */
+  display: block;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid var(--border-contrast);
+  color: var(--text);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.6);
+  font-size: 16px;
+}
+
+#buscador::placeholder { 
+  color: rgba(239,231,224,0.28); 
+}
+
+#buscador:focus { 
+  border-color: var(--wine);
+  outline: none;
+}
+
+/* =========================================================
+   FILTROS (chips de categorías)
+========================================================= */
+.filtros {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 8px 0 18px;
+  position: relative;
+  z-index: 60;
+}
+
+.filtro-btn {
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.03);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.55);
+  transition: transform var(--trans), background var(--trans), color var(--trans);
+}
+
+.filtro-btn:hover { 
+  transform: translateY(-3px);
+  background: rgba(255,255,255,0.02);
+}
+
+.filtro-btn.activo {
+  background: linear-gradient(90deg, var(--wine), var(--wine-2));
+  color: #fff;
+  box-shadow: 0 14px 40px rgba(122,21,21,0.25);
+}
+
+/* =========================================================
+   GRID DE PRODUCTOS
+========================================================= */
+#menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 8px 12px 80px 12px;
+}
+
+/* Tarjeta de producto */
+.item {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 12px;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,0.03);
+  box-shadow: 0 10px 36px rgba(0,0,0,0.6);
+  transition: transform var(--trans), box-shadow var(--trans);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 340px;
+  cursor: pointer;
+}
+
+.item:hover { 
+  transform: translateY(-6px); 
+  box-shadow: var(--shadow-strong); 
+}
+
+.item img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.item h2 { 
+  font-size: 1.05rem; 
+  font-weight: 700; 
+  color: var(--text); 
+  margin-top: 4px; 
+}
+
+.item p { 
+  color: var(--muted); 
+  font-size: 0.95rem; 
+  margin-top: 6px; 
+}
+
+/* Acciones dentro de la tarjeta */
+.acciones { 
+  margin-top: auto; 
+  display: flex; 
+  gap: 8px; 
+  align-items: stretch; 
+  justify-content: space-between; 
+}
+
+.acciones > * {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Botón agregar al carrito */
+.addCarrito,
+.acciones button {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, var(--wine), var(--wine-2));
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: 0 8px 26px rgba(122,21,21,0.2);
+  transition: transform var(--trans);
+}
+
+.addCarrito:hover,
+.acciones button:hover { 
+  transform: translateY(-3px); 
+  filter: brightness(1.06); 
+}
+
+/* Botón WhatsApp en las cards - CORREGIDO */
+.whatsapp-btn,
+.acciones a,
+a.whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #25d366, #1da851);
+  color: #fff !important;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  box-shadow: 0 8px 24px rgba(37,211,102,0.15);
+  transition: transform var(--trans), box-shadow var(--trans);
+  cursor: pointer;
+}
+
+.whatsapp-btn:hover,
+.acciones a:hover,
+a.whatsapp-btn:hover { 
+  transform: translateY(-3px); 
+  box-shadow: 0 12px 30px rgba(37,211,102,0.25);
+  color: #fff !important;
+}
+
+/* =========================================================
+   MODALES (Producto y Carrito)
+========================================================= */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  overflow: auto;
+  background: linear-gradient(rgba(2,2,2,0.55), rgba(2,2,2,0.8));
+  padding: 22px 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal[aria-hidden="false"] { 
+  display: flex; 
+}
+
+/* Contenido del modal */
+.modal-content {
+  width: 100%;
+  max-width: 640px;
+  margin: 28px auto;
+  background: linear-gradient(180deg, #121212, #0f0f0f);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: var(--shadow-strong);
+  border: 1px solid rgba(217,184,107,0.04);
+  position: relative;
+  color: var(--text);
+}
+
+/* Botón cerrar (X) */
+.cerrar,
+.cerrar-menu {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #111, #151515);
+  color: var(--text);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.03);
+  cursor: pointer;
+  z-index: 260;
+  font-size: 22px;
+  line-height: 1;
+  transition: transform var(--trans), color var(--trans);
+}
+
+.cerrar:hover,
+.cerrar-menu:hover { 
+  transform: rotate(-12deg) scale(1.05); 
+  color: var(--gold); 
+}
+
+/* Carrusel de imágenes */
+.carrusel { 
+  margin-bottom: 12px; 
+  position: relative; 
+  display: block; 
+}
+
+.carrusel img { 
+  width: 100%; 
+  height: 360px; 
+  object-fit: contain; 
+  border-radius: 10px; 
+}
+
+/* Flechas del carrusel */
+.flecha {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px; 
+  height: 40px; 
+  border-radius: 50%;
+  display: grid; 
+  place-items: center;
+  background: rgba(0,0,0,0.55);
+  color: #fff; 
+  border: none; 
+  cursor: pointer;
+  font-size: 34px;
+  transition: background var(--trans);
+}
+
+.flecha:hover {
+  background: rgba(0,0,0,0.75);
+}
+
+#prev { left: 12px; }
+#next { right: 12px; }
+
+/* Textos del modal */
+#tituloModal { 
+  font-size: 1.45rem; 
+  font-weight: 800; 
+  margin: 6px 0; 
+  color: var(--text); 
+}
+
+#precioModal { 
+  color: var(--gold); 
+  font-weight: 800; 
+  margin-bottom: 8px; 
+}
+
+#descripcionModal { 
+  color: var(--muted); 
+  font-size: 1rem; 
+  margin-bottom: 12px; 
+  line-height: 1.45; 
+}
+
+/* Botones del modal */
+#addCarritoModal {
+  display: inline-block; 
+  padding: 10px 14px; 
+  border-radius: 10px;
+  background: linear-gradient(180deg, var(--wine), var(--wine-2));
+  color: #fff; 
+  border: none; 
+  font-weight: 800; 
+  cursor: pointer;
+  box-shadow: 0 12px 36px rgba(122,21,21,0.22);
+  margin-right: 10px; 
+  transition: transform var(--trans);
+  font-size: 15px;
+}
+
+#addCarritoModal:hover { 
+  transform: translateY(-3px); 
+}
+
+#whatsappModal {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #2bd36a, #1da851);
+  color: #06110a;
+  text-decoration: none;
+  font-weight: 800;
+  border: none;
+  box-shadow: 0 10px 30px rgba(37,211,102,0.12);
+  font-size: 15px;
+  transition: transform var(--trans);
+}
+
+#whatsappModal:hover { 
+  transform: translateY(-3px); 
+}
+
+/* Botón principal genérico */
+.btn-principal {
+  background: linear-gradient(180deg, var(--wine), var(--wine-2));
+  color: #fff;
+  padding: 12px;
+  font-size: 15px;
+  border: none;
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 15px;
+  cursor: pointer;
+  font-weight: 800;
+  transition: transform var(--trans);
+}
+
+.btn-principal:hover {
+  transform: translateY(-3px);
+}
+
+/* Botón WhatsApp genérico */
+.btn-wpp {
+  background: linear-gradient(180deg, #2bd36a, #1da851);
+  color: #06110a !important;
+  text-align: center;
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 800;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform var(--trans);
+}
+
+.btn-wpp:hover {
+  transform: translateY(-3px);
+}
+
+/* =========================================================
+   MODAL CARRITO
+========================================================= */
+#modalCarrito .modal-content { 
+  max-width: 420px; 
+  padding: 16px; 
+}
+
+#modalCarrito h2 { 
+  font-size: 1.15rem; 
+  margin-bottom: 8px; 
+}
+
+#carritoLista { 
+  list-style: none; 
+  padding: 0; 
+  margin: 8px 0; 
+}
+
+#carritoLista li { 
+  display: flex; 
+  justify-content: space-between; 
+  gap: 8px; 
+  padding: 8px 0; 
+  border-bottom: 1px dashed rgba(255,255,255,0.03); 
+  color: var(--muted);
+  font-size: 14px;
+}
+
+#carritoLista .quitar { 
+  background: transparent; 
+  border: none; 
+  color: #f29b9b; 
+  cursor: pointer; 
+  font-weight: 800;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  transition: background var(--trans);
+}
+
+#carritoLista .quitar:hover {
+  background: rgba(242,155,155,0.1);
+}
+
+#carritoTotal { 
+  font-weight: 900; 
+  color: var(--gold); 
+  margin-top: 10px; 
+}
+
+#enviarCarrito {
+  display: block; 
+  margin-top: 12px; 
+  width: 100%;
+  padding: 10px 12px; 
+  border-radius: 10px; 
+  background: linear-gradient(180deg, var(--wine), var(--wine-2)); 
+  color: #fff; 
+  border: none; 
+  cursor: pointer;
+  font-weight: 800;
+  transition: transform var(--trans);
+}
+
+#enviarCarrito:hover {
+  transform: translateY(-3px);
+}
+
+/* =========================================================
+   MENÚ FLOTANTE (sidebar con datos del negocio)
+========================================================= */
+#menuFlotante {
+  display: none; 
+  position: fixed; 
+  inset: 0; 
+  z-index: 280; 
+  overflow: auto;
+  background: linear-gradient(rgba(2,2,2,0.6), rgba(2,2,2,0.85));
+  padding: 26px;
+}
+
+#menuFlotante[aria-hidden="false"],
+#menuFlotante:not(.oculto) { 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#menuFlotante.oculto {
+  display: none;
+}
+
+#menuFlotante .contenido {
+  width: 100%; 
+  max-width: 420px; 
+  margin: 48px auto; 
+  padding: 18px;
+  border-radius: 12px; 
+  background: linear-gradient(180deg, #121212, #151515);
+  border: 1px solid rgba(217,184,107,0.05);
+  box-shadow: 0 22px 70px rgba(0,0,0,0.85);
+  color: var(--text);
+  position: relative;
+}
+
+#menuFlotante h2 {
+  margin-bottom: 12px;
+}
+
+#menuFlotante p {
+  margin: 8px 0;
+  color: var(--muted);
+}
+
+/* =========================================================
+   BOTÓN CARRITO FLOTANTE
+========================================================= */
+.carrito-btn {
+  position: fixed; 
+  right: 18px; 
+  bottom: 18px; 
+  z-index: 70;
+  width: 64px; 
+  height: 64px; 
+  border-radius: 50%; 
+  border: none;
+  background: linear-gradient(180deg, var(--wine), var(--wine-2)); 
+  color: #fff;
+  display: grid; 
+  place-items: center; 
+  font-size: 22px; 
+  cursor: pointer;
+  box-shadow: 0 18px 48px rgba(122,21,21,0.25);
+  transition: transform var(--trans), box-shadow var(--trans);
+}
+
+.carrito-btn:hover { 
+  transform: translateY(-4px); 
+  box-shadow: var(--shadow-strong); 
+}
+
+/* =========================================================
+   ANIMACIONES ÚTILES
+========================================================= */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+.pulse { 
+  animation: pulse 360ms ease; 
+}
+
+.fly { 
+  position: fixed; 
+  pointer-events: none; 
+  transition: transform 520ms cubic-bezier(.2,.9,.3,1), opacity 360ms ease; 
+  will-change: transform, opacity; 
+  z-index: 300; 
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+/* Tablets y pantallas medianas (hasta 900px) */
+@media (max-width: 900px) {
+  #menu {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  
+  .carrusel img { 
+    height: 280px; 
+  }
+  
+  .logo { 
+    width: 90px; 
+    height: 90px; 
+    bottom: -40px; 
+  }
+  
+  #buscador { 
+    margin-top: 85px; 
+  }
+}
+
+/* Móviles grandes y medianos (hasta 640px) - 2 COLUMNAS */
+@media (max-width: 640px) {
+  #menu { 
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 6px 8px 80px 8px;
+  }
+  
+  .item {
+    padding: 10px;
+    min-height: 280px;
+    gap: 6px;
+  }
+  
+  .item img { 
+    height: 140px;
+  }
+  
+  .item h2 {
+    font-size: 0.9rem;
+  }
+  
+  .item p {
+    font-size: 0.85rem;
+    line-height: 1.3;
+  }
+  
+  .acciones {
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .addCarrito,
+  .acciones button,
+  .whatsapp-btn,
+  .acciones a {
+    padding: 7px 10px;
+    font-size: 13px;
+  }
+  
+  .carrusel img { 
+    height: 220px; 
+  }
+  
+  .modal-content { 
+    margin: 15px auto; 
+    padding: 14px; 
+    border-radius: 10px; 
+  }
+  
+  .filtro-btn { 
+    padding: 7px 11px; 
+    font-size: 13px; 
+  }
+  
+  .menu-btn { 
+    left: 10px; 
+    top: 10px;
+    width: 42px;
+    height: 42px;
+    font-size: 20px;
+  }
+  
+  .logo { 
+    width: 75px;
+    height: 75px;
+    bottom: -32px;
+  }
+  
+  .redes-header {
+    bottom: -68px;
+    gap: 9px;
+  }
+  
+  .icon-red {
+    width: 32px;
+    height: 32px;
+  }
+  
+  #buscador {
+    margin-top: 75px;
+    font-size: 15px;
+    padding: 11px 14px;
+  }
+  
+  body {
+    padding: 12px;
+  }
+  
+  .carrito-btn {
+    width: 56px;
+    height: 56px;
+    font-size: 20px;
+    right: 14px;
+    bottom: 14px;
+  }
+}
+
+/* Móviles muy pequeños (hasta 380px) - Ajustes finos */
+@media (max-width: 380px) {
+  #menu {
+    gap: 10px;
+  }
+  
+  .item {
+    padding: 8px;
+    min-height: 260px;
+  }
+  
+  .item img {
+    height: 120px;
+  }
+  
+  .item h2 {
+    font-size: 0.85rem;
+  }
+  
+  .item p {
+    font-size: 0.8rem;
+  }
+  
+  .addCarrito,
+  .acciones button,
+  .whatsapp-btn,
+  .acciones a {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+  
+  .filtro-btn {
+    padding: 6px 9px;
+    font-size: 12px;
+  }
+  
+  .logo {
+    width: 65px;
+    height: 65px;
+  }
+  
+  .icon-red {
+    width: 28px;
+    height: 28px;
+  }
+  
+  #buscador {
+    margin-top: 70px;
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   UTILIDADES FINALES
+========================================================= */
+a { 
+  color: inherit; 
+}
+
+button { 
+  font-family: inherit; 
+}
+
+/* Evitar selección de texto en botones */
+button,
+.filtro-btn,
+.menu-btn,
+.carrito-btn {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* ===============================
+   BOTÓN FLOTANTE DE SUGERENCIAS
+   =============================== */
+#btnSugerencias {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;             /* ← MOVIDO A LA IZQUIERDA */
+  background: #ff6b35;    /* COLOR NUEVO */
+  color: white;
+  border: none;
+  padding: 14px 22px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  z-index: 2000;
+  transition: 0.25s ease;
+}
+
+#btnSugerencias:hover {
+  background: #ff520f;
+  transform: scale(1.06);
+}
+
+/* ===============================
+   MODAL SUGERENCIAS – FONDO
+   =============================== */
+#modalSugerencias {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+  transition: opacity .25s ease;
+}
+
+#modalSugerencias.oculto {
+  display: none;
+}
+
+/* ===============================
+   CONTENEDOR DEL MODAL
+   =============================== */
+#modalSugerencias .ventana {
+  background: #fff;
+  width: 90%;
+  max-width: 420px;
+  border-radius: 14px;
+  padding: 25px;
+  position: relative;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.25);
+  animation: aparecer .25s ease;
+}
+
+/* ANIMACIÓN DE ENTRADA */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===============================
+   BOTÓN CERRAR
+   =============================== */
+#cerrarSuge {
+  position: absolute;
+  right: 14px;
+  top: 12px;
+  font-size: 20px;
+  background: none;
+  border: none;
+  color: #777;
+  cursor: pointer;
+}
+
+#cerrarSuge:hover {
+  color: #000;
+}
+
+/* ===============================
+   TÍTULO + DESCRIPCIÓN
+   =============================== */
+#modalSugerencias h2 {
+  font-size: 22px;
+  margin-bottom: 5px;
+  text-align: center;
+  color: #555;
+}
+
+#modalSugerencias p.descripcion {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+/* ===============================
+   FORMULARIO
+   =============================== */
+#modalSugerencias input,
+#modalSugerencias textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid #bbb;
+}
+
+#modalSugerencias button.enviar {
+  width: 100%;
+  background: #28a745;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: .25s ease;
+}
+
+#modalSugerencias button.enviar:hover {
+  background: #1e8d38;
+}
+
+/* ===============================
+   RESPONSIVE
+   =============================== */
+@media (max-width: 480px) {
+  #btnSugerencias {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+
+  #modalSugerencias .ventana {
+    width: 94%;
+    padding: 20px;
+  }
+}
+
+
+/* FIN estilos.css */
